@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+}
+
+group 'org.automation'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.9.1'
+    implementation group: 'io.appium', name: 'java-client', version: '8.3.0'
+    implementation group: 'org.testng', name: 'testng', version: '7.8.0'
+}
+
+
+/*tasks.withType(Test) {
+    systemProperties = [
+            tag: System.getProperty('tag', 'Smoke')
+    ]
+}*/
+/*task runTests(type: Test) {
+    useTestNG() {
+        useDefaultListeners = true
+        //testLogging.showStandardStreams = true
+        options.suites 'src/test/resources/testng.xml'
+        includeGroups System.getProperty('tag', 'NONE')
+    }
+}
+
+task runAllTests(type: Test) {
+    useTestNG() {
+        useDefaultListeners = true
+        //testLogging.showStandardStreams = true
+        options.suites 'src/test/resources/testng.xml'
+
+    }
+}*/
+
+
+test {
+    //useJUnitPlatform()
+    systemProperties = System.properties as Map<String, ?>
+    //def tests = System.getProperty('tests', 'Regression2')
+    useTestNG() {
+
+        //includeTests tests
+       options.suites 'src/test/resources/testng.xml'
+    }
+}
